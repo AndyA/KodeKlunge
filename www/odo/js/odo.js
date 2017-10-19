@@ -7,7 +7,7 @@ $(function() {
     return digits;
   }
 
-  var MAX = 1000000;
+  var MAX = 65536;
   var DIGITWIDTH = 30;
   var DIGITHEIGHT = 40;
 
@@ -42,8 +42,6 @@ $(function() {
 
   spec.forEach(function(info) {
     var digits = radixDigits(info.radix, MAX);
-    console.log(info);
-    console.log(digits);
 
     $odo = $("<div/>")
       .attr({
@@ -86,7 +84,19 @@ $(function() {
     });
   }
 
-  setInterval(update, 20);
+  $(window)
+    .on("mousemove", function(ev) {
+      var cx = $(this)
+        .width() / 2;
+      var cy = $(this)
+        .height() / 2;
+      var dx = ev.pageX - cx;
+      var dy = ev.pageY - cy;
+      var max = Math.sqrt(cx * cx + cy * cy);
+      var dist = Math.sqrt(dx * dx + dy * dy) / max;
+      value = MAX * Math.pow(dist, 5);
+      update();
+    });
 
 
 });

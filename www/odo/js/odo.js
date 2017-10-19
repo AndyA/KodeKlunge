@@ -78,25 +78,31 @@ $(function() {
   var value = 0;
 
   function update() {
-    value += 0.05;
     odos.forEach(function(info) {
       info.odo.render(info.ctx, value);
     });
   }
 
-  $(window)
-    .on("mousemove", function(ev) {
-      var cx = $(this)
-        .width() / 2;
-      var cy = $(this)
-        .height() / 2;
-      var dx = ev.pageX - cx;
-      var dy = ev.pageY - cy;
-      var max = Math.sqrt(cx * cx + cy * cy);
-      var dist = Math.sqrt(dx * dx + dy * dy) / max;
-      value = MAX * Math.pow(dist, 5);
+  if (true) {
+    setInterval(function() {
+      value += 0.05;
       update();
-    });
+    }, 20);
 
+  } else {
+    $(window)
+      .on("mousemove", function(ev) {
+        var cx = $(this)
+          .width() / 2;
+        var cy = $(this)
+          .height() / 2;
+        var dx = ev.pageX - cx;
+        var dy = ev.pageY - cy;
+        var max = Math.sqrt(cx * cx + cy * cy);
+        var dist = Math.sqrt(dx * dx + dy * dy) / max;
+        value = MAX * Math.pow(dist, 5);
+        update();
+      });
+  }
 
 });

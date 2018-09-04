@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <title>A clock</title>
+</head>
+
+<body>
+  <div id="clock">
+
+  </div>
+  <script type="text/javascript">
+    setInterval(function() {
+      var currentTime = new Date();
+      var clock = document.getElementById("clock");
+      clock.innerText = currentTime;
+    }, 500);
+
+  </script>
+</body>
+
+</html>
